@@ -1,5 +1,5 @@
 # sqlite3-cmake
-cmake build of the sqlite3 amalgamation using the autoconf release as reference
+CMake build of the SQLite3 amalgamation using the autoconf release as reference
 
 Provides a config-module which can be used like this:
 
