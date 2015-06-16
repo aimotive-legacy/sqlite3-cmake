@@ -9,13 +9,11 @@
 
 set -ex
 
-cmake -H. -Bout/build/sqlite3 -DCMAKE_INSTALL_PREFIX=${PWD}/out/install -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS
-cmake --build out/build/sqlite3 --target install --config Debug --clean-first
-cmake -DCMAKE_BUILD_TYPE=Release out/build/sqlite3
-cmake --build out/build/sqlite3 --target install --config Release --clean-first
+cmake -H. -Bout/build/libsqlite3 -DCMAKE_INSTALL_PREFIX=${PWD}/out -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS -DSQLITE_BUILD_SHELL=0
+cmake --build out/build/libsqlite3 --target install --config Release
 
-cmake -Hcmake-testbuild -Bout/build/cmake-testbuild -DCMAKE_INSTALL_PREFIX=${PWD}/out/install -DCMAKE_PREFIX_PATH=${PWD}/out/install -DCMAKE_BUILD_TYPE=Release
-cmake --build out/build/cmake-testbuild --target install --config Release
+cmake -H. -Bout/build/shell -DCMAKE_INSTALL_PREFIX=${PWD}/out -DCMAKE_PREFIX_PATH=${PWD}/out -DCMAKE_BUILD_TYPE=Release -DSQLITE_BUILD_LIB=0
+cmake --build out/build/shell --target install --config Release
 
 export LD_LIBRARY_PATH=./out/lib:$LD_LIBRARY_PATH
 
