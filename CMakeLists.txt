@@ -15,6 +15,12 @@ option(BUILD_SHARED_LIBS "" OFF)
 option(SQLITE_BUILD_LIB "Build libsqlite3, default = ON" ON)
 option(SQLITE_BUILD_SHELL "Build the sqlite3 shell, default = ON" ON)
 
+if (SQLITE_USE_SYSTEM)
+    install(FILES Findsqlite3.cmake DESTINATION lib/cmake/sqlite3 RENAME sqlite3-config.cmake)
+    set(SQLITE_BUILD_LIB 0)
+    set(SQLITE_BUILD_SHELL 0)
+endif()
+
 if(SQLITE_BUILD_LIB)
     # library output name
     if(UNIX OR BUILD_SHARED_LIBS)
